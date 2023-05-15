@@ -1,6 +1,7 @@
 package com.abserver.datasharing.controller;
 
 import com.abserver.datasharing.domain.Customer;
+import com.abserver.datasharing.dto.CustomerDTO;
 import com.abserver.datasharing.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ public class CustomerController {
     private CustomerService service;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Customer> findById(@PathVariable Integer id){
-        return ResponseEntity.ok(service.findById(id));
+    public ResponseEntity<CustomerDTO> findById(@PathVariable Integer id){
+        return ResponseEntity.ok(new CustomerDTO(service.findById(id)));
     }
 
 }
