@@ -1,6 +1,7 @@
 package com.abserver.datasharing.service;
 
 import com.abserver.datasharing.domain.Customer;
+import com.abserver.datasharing.dto.CustomerDTO;
 import com.abserver.datasharing.repository.CustomerRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
