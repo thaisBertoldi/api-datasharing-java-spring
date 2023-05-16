@@ -7,7 +7,9 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
@@ -18,6 +20,10 @@ public class CustomerService {
     public Customer findById(Integer id){
         Optional<Customer> obj =  repository.findById(id);
         return obj.orElseThrow(()->new RuntimeException("Object not found !"));
+    }
+
+    public List<CustomerDTO> findAll(){
+        return repository.findAll().stream().map(CustomerDTO::new).collect(Collectors.toList());
     }
 
 }

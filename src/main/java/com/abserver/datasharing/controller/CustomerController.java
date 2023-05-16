@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "customers")
 public class CustomerController {
@@ -22,4 +24,8 @@ public class CustomerController {
         return ResponseEntity.ok(new CustomerDTO(service.findById(id)));
     }
 
+    @GetMapping
+    public ResponseEntity<List<CustomerDTO>> findAll(){
+        return ResponseEntity.ok(service.findAll());
+    }
 }
