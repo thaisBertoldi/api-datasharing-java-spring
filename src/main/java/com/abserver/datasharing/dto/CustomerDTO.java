@@ -2,12 +2,14 @@ package com.abserver.datasharing.dto;
 
 import com.abserver.datasharing.domain.Customer;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
+@NoArgsConstructor
 public class CustomerDTO {
 
     private Integer id;
