@@ -26,4 +26,9 @@ public class CustomerService {
         return repository.findAll().stream().map(CustomerDTO::new).collect(Collectors.toList());
     }
 
+    public Customer createCustomer(CustomerDTO customerDTO) {
+        Customer customer = new Customer(null, customerDTO.getName(), customerDTO.getCpf(), customerDTO.getPhone(), customerDTO.getEmail());
+        return repository.save(customer);
+    }
+
 }
