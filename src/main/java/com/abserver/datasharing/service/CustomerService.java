@@ -17,18 +17,34 @@ public class CustomerService {
     @Autowired
     private CustomerRepository repository;
 
-    public Customer findById(Integer id){
-        Optional<Customer> obj =  repository.findById(id);
-        return obj.orElseThrow(()->new RuntimeException("Object not found !"));
+    public Customer findById(Integer id) {
+        Optional<Customer> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new RuntimeException("Object not found !"));
     }
 
-    public List<CustomerDTO> findAll(){
+    public List<CustomerDTO> findAll() {
         return repository.findAll().stream().map(CustomerDTO::new).collect(Collectors.toList());
     }
 
     public Customer createCustomer(CustomerDTO customerDTO) {
         Customer customer = new Customer(null, customerDTO.getName(), customerDTO.getCpf(), customerDTO.getPhone(), customerDTO.getEmail());
         return repository.save(customer);
+    }
+
+    public Customer update(Customer newObj) {
+        Customer obj = findById(newObj.getId());
+        updateData(newObj, obj);
+        return repository.save(obj);
+    }
+
+    private void updateData(Customer newObj, Customer obj) {
+        obj.setName(newObj.getName());
+        obj.setEmail(newObj.getEmail());
+        obj.setPhone(newObj.getPhone());
+    }
+
+    public Customer fromDTO(CustomerDTO objDTO) {
+        return new Customer(objDTO.getId(), objDTO.getName(), objDTO.getPhone(), objDTO.getEmail(), null);
     }
 
 }
