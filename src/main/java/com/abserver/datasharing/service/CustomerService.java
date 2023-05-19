@@ -37,6 +37,10 @@ public class CustomerService {
         return repository.save(obj);
     }
 
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
+    }
+
     private void updateData(Customer newObj, Customer obj) {
         obj.setName(newObj.getName());
         obj.setEmail(newObj.getEmail());
