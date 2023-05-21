@@ -3,6 +3,7 @@ package com.abserver.datasharing.controller;
 import com.abserver.datasharing.domain.Customer;
 import com.abserver.datasharing.dto.CustomerDTO;
 import com.abserver.datasharing.service.CustomerService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +44,14 @@ public class CustomerController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
         service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping(value = "/phone/{id}")
+    public ResponseEntity<String> updatePhone(@NonNull @PathVariable("id") Integer id, @Valid @RequestBody Customer obj) {
+        Customer customer = service.findById(id);
+        customer.setPhone(obj.getPhone());
+        customer = service.update(customer);
         return ResponseEntity.noContent().build();
     }
 
