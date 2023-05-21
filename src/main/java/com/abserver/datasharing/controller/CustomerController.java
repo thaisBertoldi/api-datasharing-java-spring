@@ -29,12 +29,12 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerDTO> saveCustomer(@RequestBody CustomerDTO customerDTO) {
-        return ResponseEntity.ok(new CustomerDTO(service.createCustomer(customerDTO)));
+    public ResponseEntity<CustomerDTO> create(@Valid @RequestBody CustomerDTO customerDTO) {
+        return ResponseEntity.ok(new CustomerDTO(service.create(customerDTO)));
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody CustomerDTO objDTO){
+    public ResponseEntity<Void> update(@PathVariable Integer id, @Valid @RequestBody CustomerDTO objDTO){
         Customer obj = service.fromDTO(objDTO);
         obj.setId(id);
         obj = service.update(obj);
