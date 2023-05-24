@@ -6,10 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CNPJ;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -21,11 +18,14 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String tradingName;
+    private String tradeName;
     private String cnpj;
     private String legalRepresentative;
     private String phone;
     private String email;
+
+    @OneToOne
+    @JoinColumn(name = "address_id")
     private Address address;
 
 }
