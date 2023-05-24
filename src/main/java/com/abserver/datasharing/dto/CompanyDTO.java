@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class CompanyDTO implements Serializable {
 
     private Integer id;
-    private String tradingName;
+    private String tradeName;
 
     @CNPJ
     private String cnpj;
