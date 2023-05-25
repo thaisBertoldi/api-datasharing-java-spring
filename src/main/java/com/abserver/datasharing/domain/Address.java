@@ -25,12 +25,17 @@ public class Address implements Serializable {
     private String zipCode;
     private String city;
     private String state;
+    private String country;
 
     @OneToOne(mappedBy = "address")
     @JsonIgnore
     private Company company;
 
-    public Address(Integer id, String street, String district, String number, String zipCode, String city, String state) {
+    @OneToOne(mappedBy = "address")
+    @JsonIgnore
+    private Customer customer;
+
+    public Address(Integer id, String street, String district, String number, String zipCode, String city, String state, String country) {
         this.id = id;
         this.street = street;
         this.district = district;
@@ -38,5 +43,6 @@ public class Address implements Serializable {
         this.zipCode = zipCode;
         this.city = city;
         this.state = state;
+        this.country = country;
     }
 }

@@ -1,5 +1,6 @@
 package com.abserver.datasharing.dto;
 
+import com.abserver.datasharing.domain.Address;
 import com.abserver.datasharing.domain.Customer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,11 +32,14 @@ public class CustomerDTO implements Serializable {
     @CPF
     private String cpf;
 
+    private Address address;
+
     public CustomerDTO(Customer customer) {
         this.id = customer.getId();
         this.name = customer.getName();
         this.phone = customer.getPhone();
         this.email = customer.getEmail();
         this.cpf = customer.getCpf();
+        this.address = customer.getAddress();
     }
 }

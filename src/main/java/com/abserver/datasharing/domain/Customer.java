@@ -2,10 +2,7 @@ package com.abserver.datasharing.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -21,5 +18,9 @@ public class Customer {
     private String phone;
     private String email;
     private String cpf;
+
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
 }

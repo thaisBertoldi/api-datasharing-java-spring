@@ -33,15 +33,18 @@ public class DatasharingApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Customer customer1 = new Customer(null, "Gustavo", "51989469367","gugu@abserver.com.br","01193562032");
-        Customer customer2 = new Customer(null, "Neusa", "51989558967","nene@abserver.com.br","011935611555");
-        Customer customer3 = new Customer(null, "Betina", "49995569367","bebe@abserver.com.br","01193562011");
+        Address ad1 = new Address(null, "Baker street", "Mary Lebone", "221b", "91420590", "London", "Biscoito", "England");
+        Address ad2 = new Address(null, "Rua Sushi", "Peixinho Dourado", "123", "88888888", "São Paulo", "São Paulo", "Brasil");
+        Address ad3 = new Address(null, "Avenida Biscoito", "Enorme Urso", "456", "99999999", "Sidney", "Melancia", "Austrália");
+        Address ad4 = new Address(null, "Est. do Limoeiro", "Carvão Azul", "789", "77777777", "Arvoredo", "Santa Catarina", "Brasil");
 
-        Address ad1 = new Address(null, "Baker street", "Mary Lebone", "2021b", "91420590", "London", "England");
+        Customer customer1 = new Customer(null, "Gustavo", "51989469367","gugu@abserver.com.br","01193562032", ad2);
+        Customer customer2 = new Customer(null, "Neusa", "51989558967","nene@abserver.com.br","011935611555", ad3);
+        Customer customer3 = new Customer(null, "Betina", "49995569367","bebe@abserver.com.br","01193562011", ad4);
 
         Company comp1 = new Company(null, "Mc Donalds", "78.336.743/0001-24","Ray Kroc","49986526369","mcdonals@mcdonalds.com.br",ad1);
 
-        addressRepository.saveAll(Arrays.asList(ad1));
+        addressRepository.saveAll(Arrays.asList(ad1,ad2,ad3,ad4));
         companyRepository.saveAll(Arrays.asList(comp1));
 
         customerRepository.saveAll(Arrays.asList(customer1,customer2,customer3));

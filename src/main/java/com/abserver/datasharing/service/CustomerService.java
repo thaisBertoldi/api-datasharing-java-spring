@@ -30,7 +30,7 @@ public class CustomerService {
 
     @Transactional
     public Customer create(CustomerDTO customerDTO) {
-        Customer customer = new Customer(null, customerDTO.getName(), customerDTO.getCpf(), customerDTO.getPhone(), customerDTO.getEmail());
+        Customer customer = new Customer(null, customerDTO.getName(), customerDTO.getCpf(), customerDTO.getPhone(), customerDTO.getEmail(), customerDTO.getAddress());
         return repository.save(customer);
     }
 
@@ -51,7 +51,7 @@ public class CustomerService {
     }
 
     public Customer fromDTO(CustomerDTO objDTO) {
-        return new Customer(objDTO.getId(), objDTO.getName(), objDTO.getPhone(), objDTO.getEmail(), null);
+        return new Customer(objDTO.getId(), objDTO.getName(), objDTO.getPhone(), objDTO.getEmail(), null, objDTO.getAddress());
     }
 
 
