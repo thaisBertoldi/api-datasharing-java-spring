@@ -52,4 +52,6 @@ public class CompanyService {
         obj.setPhone(objDTO.getPhone());
     }
 
+    public void deleteById(Integer id) { repository.deleteById(id); }
+
 }
