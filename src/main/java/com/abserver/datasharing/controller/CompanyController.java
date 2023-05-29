@@ -1,6 +1,8 @@
 package com.abserver.datasharing.controller;
 
 import com.abserver.datasharing.dto.CompanyDTO;
+import com.abserver.datasharing.dto.CustomerDTO;
+import com.abserver.datasharing.dto.NewCompanyDTO;
 import com.abserver.datasharing.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,11 @@ public class CompanyController {
     @GetMapping()
     public ResponseEntity<List<CompanyDTO>> findAll(){
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @PostMapping
+    public ResponseEntity<CompanyDTO> create(@RequestBody NewCompanyDTO newCompanyDTO){
+        return ResponseEntity.ok(new CompanyDTO(service.create(newCompanyDTO)));
     }
 
 }
