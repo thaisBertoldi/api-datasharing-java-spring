@@ -32,4 +32,9 @@ public class CompanyDTO implements Serializable {
         this.email = obj.getEmail();
         this.address = obj.getAddress();
     }
+
+    public CompanyDTO(String phone, String email) {
+        this.phone = phone;
+        this.email = email;
+    }
 }

@@ -1,5 +1,7 @@
 package com.abserver.datasharing.controller;
 
+import com.abserver.datasharing.domain.Company;
+import com.abserver.datasharing.domain.Customer;
 import com.abserver.datasharing.dto.CompanyDTO;
 import com.abserver.datasharing.dto.CustomerDTO;
 import com.abserver.datasharing.dto.NewCompanyDTO;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,6 +33,12 @@ public class CompanyController {
     @PostMapping
     public ResponseEntity<CompanyDTO> create(@RequestBody NewCompanyDTO newCompanyDTO){
         return ResponseEntity.ok(new CompanyDTO(service.create(newCompanyDTO)));
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable Integer id, @Valid @RequestBody CompanyDTO objDTO){
+        service.update(id, objDTO);
+        return ResponseEntity.noContent().build();
     }
 
 }
