@@ -7,8 +7,10 @@ import com.abserver.datasharing.dto.CompanyDTO;
 import com.abserver.datasharing.dto.NewCompanyDTO;
 import com.abserver.datasharing.repository.AddressRepository;
 import com.abserver.datasharing.repository.CompanyRepository;
+import com.abserver.datasharing.service.exception.AddressRepeatedException;
 import com.abserver.datasharing.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +38,12 @@ public class CompanyService {
     }
 
     public Company create(NewCompanyDTO objDTO) {
+        List<CompanyDTO> list = findAll();
+        for(CompanyDTO obj : list){
+            if(obj.getAddress().getId() == objDTO.getAddress()){
+                throw new AddressRepeatedException("this address is already in use for Company: "+obj.getTradeName());
+            }
+        }
         Address address = addressService.findById(objDTO.getAddress());
             Company obj = new Company(null, objDTO.getTradeName(), objDTO.getCnpj(), objDTO.getLegalRepresentative(), objDTO.getPhone(), objDTO.getEmail(), address);
             return repository.save(obj);
@@ -52,6 +60,10 @@ public class CompanyService {
         obj.setPhone(objDTO.getPhone());
     }
 
-    public void deleteById(Integer id) { repository.deleteById(id); }
+    public void deleteById(Integer id) {
+        Company company = findById(id);
+        repository.deleteById(id);
+        addressService.deleteById(company.getAddress().getId());
+    }
 
 }
