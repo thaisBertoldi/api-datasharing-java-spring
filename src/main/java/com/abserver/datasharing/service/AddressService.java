@@ -34,4 +34,9 @@ public class AddressService {
             "Object not found! ID: " + id + ", Type: " + Address.class.getName()));
     }
 
+    public void deleteById(Integer id) {
+        findById(id);
+        addressRepository.deleteById(id);
+    }
+
 }

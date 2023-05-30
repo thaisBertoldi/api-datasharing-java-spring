@@ -60,6 +60,10 @@ public class CompanyService {
         obj.setPhone(objDTO.getPhone());
     }
 
-    public void deleteById(Integer id) { repository.deleteById(id); }
+    public void deleteById(Integer id) {
+        Company company = findById(id);
+        repository.deleteById(id);
+        addressService.deleteById(company.getAddress().getId());
+    }
 
 }
