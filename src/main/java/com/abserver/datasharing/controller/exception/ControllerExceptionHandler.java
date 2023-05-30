@@ -1,5 +1,6 @@
 package com.abserver.datasharing.controller.exception;
 
+import com.abserver.datasharing.service.exception.AddressRepeatedException;
 import com.abserver.datasharing.service.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,16 @@ public class ControllerExceptionHandler {
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(AddressRepeatedException.class)
+    public ResponseEntity<StandardError> addressRepeatedException(AddressRepeatedException objectException) {
+
+        StandardError error = new StandardError(HttpStatus.BAD_REQUEST.value(), objectException.getMessage(),
+            System.currentTimeMillis());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+
     }
 
 }
