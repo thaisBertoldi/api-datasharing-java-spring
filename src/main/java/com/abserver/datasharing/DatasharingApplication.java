@@ -3,9 +3,11 @@ package com.abserver.datasharing;
 import com.abserver.datasharing.domain.Address;
 import com.abserver.datasharing.domain.Company;
 import com.abserver.datasharing.domain.Customer;
+import com.abserver.datasharing.domain.Employee;
 import com.abserver.datasharing.repository.AddressRepository;
 import com.abserver.datasharing.repository.CompanyRepository;
 import com.abserver.datasharing.repository.CustomerRepository;
+import com.abserver.datasharing.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +26,9 @@ public class DatasharingApplication implements CommandLineRunner {
 
     @Autowired
     private CompanyRepository companyRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     public static void main(String[] args) {
 
@@ -46,6 +51,10 @@ public class DatasharingApplication implements CommandLineRunner {
         Company comp1 = new Company(null, "Mc Donalds", "78.336.743/0001-24","Ray Kroc","49986526369","mcdonals@mcdonalds.com.br",ad1);
         Company comp2 = new Company(null, "Starbucks", "08.652.230/0001-47","Gordon Bowker","49986526369","starbucks@starbucks.com.br", ad5);
 
+        Employee emp1 = new Employee(null, "Drayton Gaboardi");
+        Employee emp2 = new Employee(null, "Fabi Bertoldi");
+
+        employeeRepository.saveAll(Arrays.asList(emp1, emp2));
         addressRepository.saveAll(Arrays.asList(ad1,ad2,ad3,ad4,ad5));
         companyRepository.saveAll(Arrays.asList(comp1, comp2));
 
