@@ -1,9 +1,6 @@
 package com.abserver.datasharing.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 @EqualsAndHashCode
-@NoArgsConstructor
 @Data
 @Entity
 public class Employee {
@@ -20,6 +17,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NonNull
     private String name;
 
 }
