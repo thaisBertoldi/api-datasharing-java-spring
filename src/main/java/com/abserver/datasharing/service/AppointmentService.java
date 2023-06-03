@@ -20,4 +20,9 @@ public class AppointmentService {
             "Object not found! ID: " + id + ", Type: " + Appointment.class.getName()));
     }
 
+    public void deleteById(Integer id) {
+        findById(id);
+        appointmentRepository.deleteById(id);
+    }
+
 }
