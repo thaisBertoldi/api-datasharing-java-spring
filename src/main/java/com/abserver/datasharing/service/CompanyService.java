@@ -2,15 +2,12 @@ package com.abserver.datasharing.service;
 
 import com.abserver.datasharing.domain.Address;
 import com.abserver.datasharing.domain.Company;
-import com.abserver.datasharing.domain.Customer;
 import com.abserver.datasharing.dto.CompanyDTO;
 import com.abserver.datasharing.dto.NewCompanyDTO;
-import com.abserver.datasharing.repository.AddressRepository;
 import com.abserver.datasharing.repository.CompanyRepository;
 import com.abserver.datasharing.service.exception.AddressRepeatedException;
 import com.abserver.datasharing.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

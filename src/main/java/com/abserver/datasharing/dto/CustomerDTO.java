@@ -1,6 +1,7 @@
 package com.abserver.datasharing.dto;
 
 import com.abserver.datasharing.domain.Address;
+import com.abserver.datasharing.domain.Appointment;
 import com.abserver.datasharing.domain.Customer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -34,6 +37,8 @@ public class CustomerDTO implements Serializable {
 
     private Address address;
 
+    private List<Appointment> appointments = new ArrayList<>();
+
     public CustomerDTO(Customer customer) {
         this.id = customer.getId();
         this.name = customer.getName();
@@ -41,5 +46,6 @@ public class CustomerDTO implements Serializable {
         this.email = customer.getEmail();
         this.cpf = customer.getCpf();
         this.address = customer.getAddress();
+        this.appointments =customer.getAppointments();
     }
 }
