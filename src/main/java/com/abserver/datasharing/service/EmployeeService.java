@@ -5,7 +5,6 @@ import com.abserver.datasharing.repository.EmployeeRepository;
 import com.abserver.datasharing.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +28,11 @@ public class EmployeeService {
     public Employee create(Employee employee) {
         Employee newEmployee = new Employee(employee.getId(), employee.getName());
         return employeeRepository.save(newEmployee);
+    }
+
+    public void deleteById(Integer id) {
+        findById(id);
+        employeeRepository.deleteById(id);
     }
 
 }
