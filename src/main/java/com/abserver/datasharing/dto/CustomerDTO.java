@@ -27,7 +27,7 @@ public class CustomerDTO implements Serializable {
     private String phone;
 
     @NotEmpty(message = "Completion is mandatory ! ")
-    @Length(min = 10, max = 20, message = "Length must be between 10 and 20 characters")
+    @Length(min = 10, max = 50, message = "Length must be between 10 and 50 characters")
     private String email;
 
     @NotEmpty(message = "Completion is mandatory ! ")
@@ -35,7 +35,7 @@ public class CustomerDTO implements Serializable {
     @CPF
     private String cpf;
 
-    private Address address;
+    private Integer address;
 
     private List<Appointment> appointments = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class CustomerDTO implements Serializable {
         this.phone = customer.getPhone();
         this.email = customer.getEmail();
         this.cpf = customer.getCpf();
-        this.address = customer.getAddress();
+        this.address = customer.getAddress().getId();
         this.appointments =customer.getAppointments();
     }
 }
