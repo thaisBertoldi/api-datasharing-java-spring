@@ -1,5 +1,6 @@
 package com.abserver.datasharing.service;
 
+import com.abserver.datasharing.domain.Address;
 import com.abserver.datasharing.domain.Customer;
 import com.abserver.datasharing.dto.CustomerDTO;
 import com.abserver.datasharing.repository.CustomerRepository;
@@ -18,6 +19,9 @@ public class CustomerService {
     @Autowired
     private CustomerRepository repository;
 
+    @Autowired
+    private AddressService addressService;
+
     public Customer findById(Integer id) {
         Optional<Customer> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -30,7 +34,8 @@ public class CustomerService {
 
     @Transactional
     public Customer create(CustomerDTO customerDTO) {
-        Customer customer = new Customer(null, customerDTO.getName(), customerDTO.getCpf(), customerDTO.getPhone(), customerDTO.getEmail(), customerDTO.getAppointments(), customerDTO.getAddress());
+        Address address = addressService.findById(customerDTO.getAddress());
+        Customer customer = new Customer(null, customerDTO.getName(), customerDTO.getCpf(), customerDTO.getPhone(), customerDTO.getEmail(), customerDTO.getAppointments(), address);
         return repository.save(customer);
     }
 
@@ -51,7 +56,8 @@ public class CustomerService {
     }
 
     public Customer fromDTO(CustomerDTO objDTO) {
-        return new Customer(objDTO.getId(), objDTO.getName(), objDTO.getPhone(), objDTO.getEmail(), null, objDTO.getAppointments(), objDTO.getAddress());
+        Address address = addressService.findById(objDTO.getAddress());
+        return new Customer(objDTO.getId(), objDTO.getName(), objDTO.getPhone(), objDTO.getEmail(), null, objDTO.getAppointments(), address);
     }
 
 

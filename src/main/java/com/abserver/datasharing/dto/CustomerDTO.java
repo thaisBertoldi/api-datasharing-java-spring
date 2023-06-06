@@ -35,7 +35,7 @@ public class CustomerDTO implements Serializable {
     @CPF
     private String cpf;
 
-    private Address address;
+    private Integer address;
 
     private List<Appointment> appointments = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class CustomerDTO implements Serializable {
         this.phone = customer.getPhone();
         this.email = customer.getEmail();
         this.cpf = customer.getCpf();
-        this.address = customer.getAddress();
+        this.address = customer.getAddress().getId();
         this.appointments =customer.getAppointments();
     }
 }
