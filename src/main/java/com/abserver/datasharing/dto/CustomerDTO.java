@@ -27,7 +27,7 @@ public class CustomerDTO implements Serializable {
     private String phone;
 
     @NotEmpty(message = "Completion is mandatory ! ")
-    @Length(min = 10, max = 20, message = "Length must be between 10 and 20 characters")
+    @Length(min = 10, max = 50, message = "Length must be between 10 and 50 characters")
     private String email;
 
     @NotEmpty(message = "Completion is mandatory ! ")
