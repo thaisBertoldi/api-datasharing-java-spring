@@ -23,7 +23,7 @@ public class Customer {
     private String cpf;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer")
     private List<Appointment> appointments = new ArrayList<>();
 
     @OneToOne
