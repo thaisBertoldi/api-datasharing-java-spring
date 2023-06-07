@@ -21,7 +21,13 @@ public class Appointment {
     private Integer id;
 
     @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
+
     private Date initialSchedule;
     private Date finalSchedule;
     private Double serviceValue;
