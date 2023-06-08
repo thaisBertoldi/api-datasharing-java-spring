@@ -1,7 +1,7 @@
 package com.abserver.datasharing.controller;
 
 import com.abserver.datasharing.domain.Appointment;
-import com.abserver.datasharing.repository.AppointmentRepository;
+import com.abserver.datasharing.dto.AppointmentDTO;
 import com.abserver.datasharing.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +30,12 @@ public class AppointmentController {
     @GetMapping
     public ResponseEntity<List<Appointment>> findAll(){
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @PostMapping
+    public ResponseEntity<Appointment> create(@RequestBody AppointmentDTO dto){
+        Appointment obj = service.create(dto);
+        return ResponseEntity.ok(obj);
     }
 
 }
