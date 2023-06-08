@@ -31,5 +31,4 @@ public class Appointment {
     private Date initialSchedule;
     private Date finalSchedule;
     private Double serviceValue;
-
 }

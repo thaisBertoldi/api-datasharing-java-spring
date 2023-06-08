@@ -1,7 +1,13 @@
 package com.abserver.datasharing.service;
 
+import com.abserver.datasharing.domain.Address;
 import com.abserver.datasharing.domain.Appointment;
+import com.abserver.datasharing.domain.Company;
+import com.abserver.datasharing.domain.Customer;
+import com.abserver.datasharing.dto.AppointmentDTO;
 import com.abserver.datasharing.repository.AppointmentRepository;
+import com.abserver.datasharing.repository.CompanyRepository;
+import com.abserver.datasharing.repository.CustomerRepository;
 import com.abserver.datasharing.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +20,18 @@ public class AppointmentService {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
+
+    @Autowired
+    private CompanyService companyService;
+
+    @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private CompanyRepository companyRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     public Appointment findById(Integer id) {
         Optional<Appointment> obj = appointmentRepository.findById(id);
@@ -28,5 +46,30 @@ public class AppointmentService {
 
     public List<Appointment> findAll() {
         return appointmentRepository.findAll();
+    }
+
+    public Appointment create(AppointmentDTO dto){
+        Appointment obj = transformDtoFromAppointment(dto);
+
+        Company company = companyService.findById(dto.getCompany());
+        company.getAppointments().add(obj);
+        companyRepository.save(company);
+
+        Customer customer = customerService.findById(dto.getCustomer());
+        customer.getAppointments().add(obj);
+        customerRepository.save(customer);
+
+        return appointmentRepository.save(obj);
+    }
+
+    public Appointment transformDtoFromAppointment(AppointmentDTO dto){
+        Integer idCustomer = dto.getCustomer();
+        Integer idCompany = dto.getCompany();
+        Customer objCustomer = customerService.findById(idCustomer);
+        Customer customer = new Customer(idCustomer, objCustomer.getName(), objCustomer.getPhone(), objCustomer.getEmail(), objCustomer.getCpf(), objCustomer.getAddress());
+
+        Company objCompany = companyService.findById(idCompany);
+        Company company = new Company(idCompany, objCompany.getTradeName(), objCompany.getCnpj(), objCompany.getLegalRepresentative(), objCompany.getPhone(), objCompany.getEmail(), objCompany.getAddress());
+        return new Appointment(null, customer, company, dto.getInitialSchedule(), dto.getFinalSchedule(), dto.getServiceValue());
     }
 }
