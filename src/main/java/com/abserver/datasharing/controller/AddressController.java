@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "addresses")
@@ -29,5 +30,10 @@ public class AddressController {
     public ResponseEntity<Void> update(@RequestBody Address obj){
         addressService.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Address>> findAll(){
+        return ResponseEntity.ok(addressService.findAll());
     }
 }
