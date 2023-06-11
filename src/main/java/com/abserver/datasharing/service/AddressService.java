@@ -6,6 +6,7 @@ import com.abserver.datasharing.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +39,12 @@ public class AddressService {
         findById(id);
         addressRepository.deleteById(id);
     }
+
+    public void update(Address address){
+        findById(address.getId());
+        addressRepository.save(address);
+    }
+
+    public List<Address> findAll() { return addressRepository.findAll(); }
 
 }
