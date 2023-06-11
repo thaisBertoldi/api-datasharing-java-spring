@@ -24,4 +24,10 @@ public class AddressController {
     public ResponseEntity<Address> findById(@PathVariable Integer id) {
         return ResponseEntity.ok(addressService.findById(id));
     }
+
+    @PutMapping
+    public ResponseEntity<Void> update(@RequestBody Address obj){
+        addressService.update(obj);
+        return ResponseEntity.noContent().build();
+    }
 }
