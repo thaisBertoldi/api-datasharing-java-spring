@@ -54,6 +54,8 @@ public class CustomerService {
     }
 
     public void deleteById(Integer id) {
+        Customer customer = findById(id);
+        addressService.deleteById(customer.getAddress().getId());
         repository.deleteById(id);
     }
 
