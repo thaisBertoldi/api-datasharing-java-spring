@@ -6,7 +6,9 @@ import com.abserver.datasharing.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -35,7 +37,8 @@ public class AppointmentController {
     @PostMapping
     public ResponseEntity<Appointment> create(@RequestBody AppointmentDTO dto){
         Appointment obj = service.create(dto);
-        return ResponseEntity.ok(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
 }

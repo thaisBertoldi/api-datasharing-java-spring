@@ -5,9 +5,11 @@ import com.abserver.datasharing.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "addresses")
@@ -18,7 +20,9 @@ public class AddressController {
 
     @PostMapping
     public ResponseEntity<Address> create(@Valid @RequestBody Address address) {
-        return ResponseEntity.ok(addressService.create(address));
+        Address obj = addressService.create(address);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @GetMapping(value = "/{id}")

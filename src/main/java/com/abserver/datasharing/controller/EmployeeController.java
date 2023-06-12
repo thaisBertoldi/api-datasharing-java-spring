@@ -5,8 +5,10 @@ import com.abserver.datasharing.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,7 +30,9 @@ public class EmployeeController {
 
     @PostMapping
     public ResponseEntity<Employee> create(@Valid @RequestBody Employee employee) {
-        return ResponseEntity.ok(employeeService.create(employee));
+        Employee obj = employeeService.create(employee);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @DeleteMapping(value = "/{id}")
