@@ -9,8 +9,10 @@ import com.abserver.datasharing.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -32,7 +34,9 @@ public class CompanyController {
 
     @PostMapping
     public ResponseEntity<CompanyDTO> create(@RequestBody NewCompanyDTO newCompanyDTO){
-        return ResponseEntity.ok(new CompanyDTO(service.create(newCompanyDTO)));
+        CompanyDTO obj = new CompanyDTO(service.create(newCompanyDTO));
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @PutMapping(value = "/{id}")
