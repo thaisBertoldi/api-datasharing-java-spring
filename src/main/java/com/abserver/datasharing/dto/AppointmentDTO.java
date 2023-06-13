@@ -1,16 +1,15 @@
 package com.abserver.datasharing.dto;
 
-import com.abserver.datasharing.domain.Appointment;
 import com.abserver.datasharing.domain.Company;
 import com.abserver.datasharing.domain.Customer;
+import com.abserver.datasharing.domain.enums.Status;
 import com.abserver.datasharing.repository.CompanyRepository;
 import com.abserver.datasharing.repository.CustomerRepository;
 import com.abserver.datasharing.service.AppointmentService;
 import com.abserver.datasharing.service.CompanyService;
 import com.abserver.datasharing.service.CustomerService;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import net.bytebuddy.utility.nullability.MaybeNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
@@ -27,5 +26,23 @@ public class AppointmentDTO implements Serializable {
     private Date initialSchedule;
     private Date finalSchedule;
     private Double serviceValue;
+    private Integer status;
+
+    public AppointmentDTO(Integer id, Integer customer, Integer company, Date initialSchedule, Date finalSchedule, Double serviceValue) {
+        this.id = id;
+        this.customer = customer;
+        this.company = company;
+        this.initialSchedule = initialSchedule;
+        this.finalSchedule = finalSchedule;
+        this.serviceValue = serviceValue;
+        this.status = 0;
+    }
+
+    public Status getStatus() {
+        return Status.toEnum(this.status);
+    }
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
 }

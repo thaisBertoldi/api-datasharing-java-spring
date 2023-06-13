@@ -23,12 +23,6 @@ public class AppointmentController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
-        service.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
     @GetMapping
     public ResponseEntity<List<Appointment>> findAll(){
         return ResponseEntity.ok(service.findAll());

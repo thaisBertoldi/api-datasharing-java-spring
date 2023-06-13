@@ -1,5 +1,6 @@
 package com.abserver.datasharing.domain;
 
+import com.abserver.datasharing.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,4 +32,21 @@ public class Appointment {
     private Date initialSchedule;
     private Date finalSchedule;
     private Double serviceValue;
+    private Integer status;
+
+    public Appointment(Integer id, Customer customer, Company company, Date initialSchedule, Date finalSchedule, Double serviceValue) {
+        this.id = id;
+        this.customer = customer;
+        this.company = company;
+        this.initialSchedule = initialSchedule;
+        this.finalSchedule = finalSchedule;
+        this.serviceValue = serviceValue;
+        this.status = 0;
+    }
+    public Status getStatus() {
+        return Status.toEnum(this.status);
+    }
+    public void setStatus(Status status) {
+        this.status = status.getCod();
+    }
 }
