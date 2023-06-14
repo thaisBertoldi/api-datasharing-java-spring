@@ -33,8 +33,9 @@ public class Appointment {
     private Date finalSchedule;
     private Double serviceValue;
     private Integer status;
+    private String description;
 
-    public Appointment(Integer id, Customer customer, Company company, Date initialSchedule, Date finalSchedule, Double serviceValue) {
+    public Appointment(Integer id, Customer customer, Company company, Date initialSchedule, Date finalSchedule, Double serviceValue, String description) {
         this.id = id;
         this.customer = customer;
         this.company = company;
@@ -42,6 +43,7 @@ public class Appointment {
         this.finalSchedule = finalSchedule;
         this.serviceValue = serviceValue;
         this.status = 0;
+        this.description = description;
     }
     public Status getStatus() {
         return Status.toEnum(this.status);

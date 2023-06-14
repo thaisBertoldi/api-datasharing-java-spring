@@ -27,8 +27,9 @@ public class AppointmentDTO implements Serializable {
     private Date finalSchedule;
     private Double serviceValue;
     private Integer status;
+    private String description;
 
-    public AppointmentDTO(Integer id, Integer customer, Integer company, Date initialSchedule, Date finalSchedule, Double serviceValue) {
+    public AppointmentDTO(Integer id, Integer customer, Integer company, Date initialSchedule, Date finalSchedule, Double serviceValue,String description) {
         this.id = id;
         this.customer = customer;
         this.company = company;
@@ -36,13 +37,10 @@ public class AppointmentDTO implements Serializable {
         this.finalSchedule = finalSchedule;
         this.serviceValue = serviceValue;
         this.status = 0;
+        this.description = description;
     }
 
     public Status getStatus() {
         return Status.toEnum(this.status);
     }
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
 }

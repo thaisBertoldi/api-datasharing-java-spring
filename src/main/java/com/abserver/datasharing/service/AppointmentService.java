@@ -1,9 +1,9 @@
 package com.abserver.datasharing.service;
 
-import com.abserver.datasharing.domain.Address;
 import com.abserver.datasharing.domain.Appointment;
 import com.abserver.datasharing.domain.Company;
 import com.abserver.datasharing.domain.Customer;
+import com.abserver.datasharing.domain.enums.Status;
 import com.abserver.datasharing.dto.AppointmentDTO;
 import com.abserver.datasharing.repository.AppointmentRepository;
 import com.abserver.datasharing.repository.CompanyRepository;
@@ -12,6 +12,7 @@ import com.abserver.datasharing.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,10 +41,11 @@ public class AppointmentService {
     }
 
     public List<Appointment> findAll() {
+        checkStatus();
         return appointmentRepository.findAll();
     }
 
-    public Appointment create(AppointmentDTO dto){
+    public Appointment create(AppointmentDTO dto) {
         Appointment obj = transformDtoFromAppointment(dto);
 
         Company company = companyService.findById(dto.getCompany());
@@ -57,7 +59,7 @@ public class AppointmentService {
         return appointmentRepository.save(obj);
     }
 
-    public Appointment transformDtoFromAppointment(AppointmentDTO dto){
+    public Appointment transformDtoFromAppointment(AppointmentDTO dto) {
         Integer idCustomer = dto.getCustomer();
         Integer idCompany = dto.getCompany();
         Customer objCustomer = customerService.findById(idCustomer);
@@ -65,6 +67,19 @@ public class AppointmentService {
 
         Company objCompany = companyService.findById(idCompany);
         Company company = new Company(idCompany, objCompany.getTradeName(), objCompany.getCnpj(), objCompany.getLegalRepresentative(), objCompany.getPhone(), objCompany.getEmail(), objCompany.getAddress());
-        return new Appointment(null, customer, company, dto.getInitialSchedule(), dto.getFinalSchedule(), dto.getServiceValue());
+        return new Appointment(null, customer, company, dto.getInitialSchedule(), dto.getFinalSchedule(), dto.getServiceValue(), dto.getDescription());
+    }
+
+    public void checkStatus() {
+        List<Appointment> list = appointmentRepository.findAll();
+        for (Appointment obj : list) {
+            if (obj.getStatus().getCod() == 0) {
+                if (obj.getFinalSchedule().before(new Date())) {
+                    obj.setStatus(Status.FINISHED);
+                    appointmentRepository.save(obj);
+                }
+            }
+
+        }
     }
 }
