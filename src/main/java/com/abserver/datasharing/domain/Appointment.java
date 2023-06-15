@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -33,6 +34,7 @@ public class Appointment {
     private Date finalSchedule;
     private Double serviceValue;
     private Integer status;
+    @NotNull
     private String description;
 
     public Appointment(Integer id, Customer customer, Company company, Date initialSchedule, Date finalSchedule, Double serviceValue, String description) {

@@ -12,6 +12,7 @@ import lombok.*;
 import net.bytebuddy.utility.nullability.MaybeNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,6 +28,7 @@ public class AppointmentDTO implements Serializable {
     private Date finalSchedule;
     private Double serviceValue;
     private Integer status;
+    @NotNull
     private String description;
 
     public AppointmentDTO(Integer id, Integer customer, Integer company, Date initialSchedule, Date finalSchedule, Double serviceValue,String description) {
