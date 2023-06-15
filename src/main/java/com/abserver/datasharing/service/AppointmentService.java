@@ -35,14 +35,16 @@ public class AppointmentService {
     private CustomerRepository customerRepository;
 
     public Appointment findById(Integer id) {
+        findAll();
         Optional<Appointment> obj = appointmentRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
             "Object not found! ID: " + id + ", Type: " + Appointment.class.getName()));
     }
 
     public List<Appointment> findAll() {
-        checkStatus();
-        return appointmentRepository.findAll();
+        List<Appointment> list = appointmentRepository.findAll();
+        checkStatus(list);
+        return list;
     }
 
     public Appointment create(AppointmentDTO dto) {
@@ -70,8 +72,7 @@ public class AppointmentService {
         return new Appointment(null, customer, company, dto.getInitialSchedule(), dto.getFinalSchedule(), dto.getServiceValue(), dto.getDescription());
     }
 
-    public void checkStatus() {
-        List<Appointment> list = appointmentRepository.findAll();
+    public void checkStatus(List<Appointment> list) {
         for (Appointment obj : list) {
             if (obj.getStatus().getCod() == 0) {
                 if (obj.getFinalSchedule().before(new Date())) {
@@ -79,7 +80,6 @@ public class AppointmentService {
                     appointmentRepository.save(obj);
                 }
             }
-
         }
     }
 }
