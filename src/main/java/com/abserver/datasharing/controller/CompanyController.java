@@ -40,7 +40,7 @@ public class CompanyController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@PathVariable Integer id, @Valid @RequestBody CompanyDTO objDTO){
+    public ResponseEntity<Void> update(@PathVariable Integer id, @Valid @RequestBody NewCompanyDTO objDTO){
         service.update(id, objDTO);
         return ResponseEntity.noContent().build();
     }
