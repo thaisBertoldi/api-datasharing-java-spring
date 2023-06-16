@@ -10,6 +10,7 @@ import com.abserver.datasharing.repository.CompanyRepository;
 import com.abserver.datasharing.repository.CustomerRepository;
 import com.abserver.datasharing.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -81,5 +82,11 @@ public class AppointmentService {
                 }
             }
         }
+    }
+
+    public Appointment updateStatusCanceled(Integer id) {
+        Appointment obj = findById(id);
+        obj.setStatus(Status.CANCELED);
+        return appointmentRepository.save(obj);
     }
 }

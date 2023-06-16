@@ -36,4 +36,10 @@ public class AppointmentController {
         return ResponseEntity.created(uri).build();
     }
 
+    @PutMapping(value = "status-cancel/{id}")
+    public ResponseEntity<Appointment> updateStatusCanceled(@PathVariable Integer id){
+        Appointment obj = service.updateStatusCanceled(id);
+        return ResponseEntity.ok(obj);
+    }
+
 }

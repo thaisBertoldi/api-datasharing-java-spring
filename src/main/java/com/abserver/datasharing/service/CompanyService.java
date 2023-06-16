@@ -46,13 +46,13 @@ public class CompanyService {
             return repository.save(obj);
     }
 
-    public Company update(Integer id, CompanyDTO objDTO) {
+    public Company update(Integer id, NewCompanyDTO objDTO) {
         Company obj = findById(id);
         updateData(objDTO, obj);
         return repository.save(obj);
     }
 
-    private void updateData(CompanyDTO objDTO, Company obj) {
+    private void updateData(NewCompanyDTO objDTO, Company obj) {
         obj.setEmail(objDTO.getEmail());
         obj.setPhone(objDTO.getPhone());
     }
