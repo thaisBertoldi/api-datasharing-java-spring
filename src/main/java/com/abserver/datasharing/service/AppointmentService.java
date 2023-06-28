@@ -10,7 +10,9 @@ import com.abserver.datasharing.repository.CompanyRepository;
 import com.abserver.datasharing.repository.CustomerRepository;
 import com.abserver.datasharing.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -88,5 +90,10 @@ public class AppointmentService {
         Appointment obj = findById(id);
         obj.setStatus(Status.CANCELED);
         return appointmentRepository.save(obj);
+    }
+
+    public Page<Appointment> findPage(Integer page, Integer linesPerPage, String direction, String orderBy) {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+        return appointmentRepository.findAll(pageRequest);
     }
 }

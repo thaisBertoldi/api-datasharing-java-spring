@@ -42,8 +42,17 @@ public class DBService {
         Company comp2 = new Company(null, "Starbucks", "08.652.230/0001-47","Gordon Bowker","49986526369","starbucks@starbucks.com.br", ad5);
 
         Appointment ap1 = new Appointment(null, customer1, comp1, new Date(),sdf.parse("2023-06-03 20:30"), 50.00, "have a haircut");
-        comp1.getAppointments().addAll(Arrays.asList(ap1));
-        customer1.getAppointments().addAll(Arrays.asList(ap1));
+        Appointment ap2 = new Appointment(null, customer2, comp1, new Date(),sdf.parse("2023-06-03 20:30"), 50.00, "have a nailcut");
+        Appointment ap3 = new Appointment(null, customer3, comp1, new Date(),sdf.parse("2023-06-03 20:30"), 50.00, "have a shower");
+        Appointment ap4 = new Appointment(null, customer3, comp1, new Date(),sdf.parse("2023-06-03 20:30"), 50.00, "have a make");
+        Appointment ap5 = new Appointment(null, customer1, comp1, new Date(),sdf.parse("2023-06-03 20:30"), 50.00, "have a top haircut");
+        Appointment ap6 = new Appointment(null, customer2, comp1, new Date(),sdf.parse("2023-06-03 20:30"), 50.00, "have a kids haircut");
+        Appointment ap7 = new Appointment(null, customer2, comp1, new Date(),sdf.parse("2023-06-03 20:30"), 50.00, "have a massage");
+        Appointment ap8 = new Appointment(null, customer1, comp1, new Date(),sdf.parse("2023-06-03 20:30"), 50.00, "have a hair removal");
+        comp1.getAppointments().addAll(Arrays.asList(ap1, ap2, ap3, ap4, ap5, ap6, ap7, ap8));
+        customer1.getAppointments().addAll(Arrays.asList(ap1, ap5, ap8));
+        customer2.getAppointments().addAll(Arrays.asList(ap2, ap6, ap7));
+        customer3.getAppointments().addAll(Arrays.asList(ap3, ap4));
 
         Employee emp1 = new Employee(null, "Drayton Gaboardi");
         Employee emp2 = new Employee(null, "Fabi Bertoldi");
@@ -52,7 +61,7 @@ public class DBService {
         addressRepository.saveAll(Arrays.asList(ad1,ad2,ad3,ad4,ad5));
         companyRepository.saveAll(Arrays.asList(comp1, comp2));
         customerRepository.saveAll(Arrays.asList(customer1,customer2,customer3));
-        appointmentRepository.saveAll(Arrays.asList(ap1));
+        appointmentRepository.saveAll(Arrays.asList(ap1, ap2, ap3, ap4, ap5, ap6, ap7, ap8));
 
     }
 }
