@@ -1,16 +1,9 @@
 package com.abserver.datasharing.dto;
 
-import com.abserver.datasharing.domain.Company;
-import com.abserver.datasharing.domain.Customer;
 import com.abserver.datasharing.domain.enums.Status;
-import com.abserver.datasharing.repository.CompanyRepository;
-import com.abserver.datasharing.repository.CustomerRepository;
-import com.abserver.datasharing.service.AppointmentService;
-import com.abserver.datasharing.service.CompanyService;
-import com.abserver.datasharing.service.CustomerService;
-import lombok.*;
-import net.bytebuddy.utility.nullability.MaybeNull;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
